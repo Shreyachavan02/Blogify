@@ -9,6 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+let requestCount = 0;
 
 const connectDB = async () => {
   try {
@@ -21,6 +22,15 @@ const connectDB = async () => {
   }
 };
 
+app.get("/api/request-count", (req, res) => {
+  res.json({ requestCount });
+});
+
+app.use((req, res, next) => {
+requestCount++;
+next();
+});
+
 app.get("/", (req, res) => {
   res.json({
     success: true,
@@ -28,6 +38,21 @@ app.get("/", (req, res) => {
 
   });
 });
+
+
+app.get("/api/test1", (req, res, next) => {
+  console.log("Actual Controller test1 called");
+  res.json({ message: "Test1 route reached" });
+});
+
+
+app.get("/api/test2",( req, res, next) => {
+  console.log("Actual Controller test2 called");
+  res.json({ message: "Test2 route reached" });
+});
+
+app.post("/signup")
+app.post("/login")
 
 const PORT = process.env.PORT || 8080;
 
