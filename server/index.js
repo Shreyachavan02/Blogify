@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import { postLogin, postSignup } from "./controllers/user.js";
+
 dotenv.config();
 
 const app = express();
@@ -51,8 +53,8 @@ app.get("/api/test2",( req, res, next) => {
   res.json({ message: "Test2 route reached" });
 });
 
-app.post("/signup")
-app.post("/login")
+app.post("/signup" , postSignup);
+app.post("/login", postLogin);
 
 const PORT = process.env.PORT || 8080;
 
