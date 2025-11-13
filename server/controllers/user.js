@@ -27,7 +27,7 @@ if(emailValidationRegex.test(email) == false){
         message: "Email is not valid",
     });
 }
-if(passwordValidationRegex.test(password) === false){ {
+if(passwordValidationRegex.test(password) === false) { 
     return res.status(400).json({
         success: false,
         message: "password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character",
@@ -54,7 +54,7 @@ res.json({
 
  });
 };
-};
+
 const postLogin = (req, res) => {};
 
 export { postSignup, postLogin };
