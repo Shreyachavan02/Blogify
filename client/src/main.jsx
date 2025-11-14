@@ -20,12 +20,9 @@ createRoot(document.getElementById('root')).render(
       <Route path="/edit/:id" element={<EditBlog />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route
-        path="*"
-        element={<h1 className="text-center mt-5">404 Not Found</h1>}
-      />
+      <Route path="*" element={<h1 className="text-center mt-5">404 Not Found</h1>} />
     </Routes>
 
-    <Footer /> 
+    <Footer />
   </BrowserRouter>
 );
