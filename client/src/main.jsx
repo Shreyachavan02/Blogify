@@ -8,11 +8,11 @@ import EditBlog from "./views/EditBlog";
 import Signup from './views/Signup';
 import Login from "./views/Login";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer"; // ✅ import Footer
+import Footer from "./components/Footer"; 
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <Navbar /> {/* ✅ Navbar on all pages */}
+    <Navbar />
 
     <Routes>
       <Route path="/" element={<AllBlogs />} />
@@ -26,6 +26,6 @@ createRoot(document.getElementById('root')).render(
       />
     </Routes>
 
-    <Footer /> {/* ✅ Footer appears on all pages */}
+    <Footer /> 
   </BrowserRouter>
 );

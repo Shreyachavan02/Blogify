@@ -6,12 +6,12 @@ const Footer = () => {
     <footer className="bg-sky-900 text-gray-200 shadow-inner w-full fixed bottom-0 left-0 z-40">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 py-3">
         
-        {/* Left Section - Brand */}
+        
         <h2 className="text-lg font-bold tracking-wide text-white hover:text-sky-300 transition">
           Blogify
         </h2>
 
-        {/* Center Section - Contact */}
+  
         <div className="flex items-center space-x-6 mt-2 md:mt-0">
           <a
             href="mailto:contact@blogify.com"
@@ -27,7 +27,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Right Section - Social Links */}
+       
         <div className="flex items-center space-x-4 mt-2 md:mt-0">
           <a
             href="https://instagram.com"
@@ -64,7 +64,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Bar */}
+    
       <div className="text-center text-gray-400 text-sm border-t border-sky-800 py-1">
         <div className="flex justify-center items-center space-x-1">
           <Copyright size={14} />
