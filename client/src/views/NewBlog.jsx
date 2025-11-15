@@ -4,6 +4,8 @@ const NewBlog = () => {
   return (
     <div>
       
+
+      
     </div>
   )
 }
