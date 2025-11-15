@@ -35,7 +35,7 @@ function Navbar() {
 
           <li>
             <NavLink
-              to="/new"
+              to="/newblog"
               className={({ isActive }) =>
                 `font-medium transition duration-300 ${
                   isActive
@@ -51,7 +51,7 @@ function Navbar() {
           {/* New Edit Blog Link */}
           <li>
             <NavLink
-              to="/edit"
+              to="/edit/:id"
               className={({ isActive }) =>
                 `font-medium transition duration-300 ${
                   isActive
