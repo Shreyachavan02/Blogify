@@ -1,9 +1,19 @@
-import express from "express";
+
+
 import cors from "cors";
 import dotenv from "dotenv";
+import express from "express";
+import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import {
+  getBlogForSlug,
+  getBlogs,
+  patchPublishBlog,
+  postBlogs,
+  putBlogs,
+} from "./controllers/blog.js";
 import { postLogin, postSignup } from "./controllers/user.js";
-
+import Blog from "./models/Blog.js";
 dotenv.config();
 
 const app = express();
@@ -11,50 +21,68 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-let requestCount = 0;
-
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGODB_URL);
     if (conn) {
-      console.log("MongoDB connected successfully");
+      console.log("MongoDB connected");
     }
-  }catch (error) {
-    console.error("Error connecting to MongoDB:", error);
+  } catch (error) {
+    console.error("MongoDB connection error:", error);
   }
 };
-
-app.get("/api/request-count", (req, res) => {
-  res.json({ requestCount });
-});
-
-app.use((req, res, next) => {
-requestCount++;
-next();
-});
 
 app.get("/", (req, res) => {
   res.json({
     success: true,
-    message: "Welcome to the Blogify API !",
-
+    message: "Server is up and running...",
   });
 });
 
+const jwtCheck = (req, res, next) => {
+  req.user = null;
 
-app.get("/api/test1", (req, res, next) => {
-  console.log("Actual Controller test1 called");
-  res.json({ message: "Test1 route reached" });
-});
+  const { authorization } = req.headers;
 
+  if (!authorization) {
+    return res.status(400).json({ message: "Authorization token missing" });
+  }
 
-app.get("/api/test2",( req, res, next) => {
-  console.log("Actual Controller test2 called");
-  res.json({ message: "Test2 route reached" });
-});
+  try {
+    const token = authorization.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
 
-app.post("/signup" , postSignup);
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: "Invalid JWT Token" });
+  }
+};
+
+const increaseViewCount = async (req, res, next) => {
+  const { slug } = req.params;
+
+  try {
+    const blog = await Blog.findOne({ slug });
+    if (blog) {
+      blog.viewCount += 1;
+      await blog.save();
+    }
+  } catch (error) {
+    console.error("Error increasing view count:", error);
+  }
+
+  next();
+};
+
+app.post("/signup", postSignup);
 app.post("/login", postLogin);
+app.get("/blogs", getBlogs);
+app.get("/blogs/:slug", increaseViewCount, getBlogForSlug);
+
+app.post("/blogs", jwtCheck, postBlogs);
+app.patch("/blogs/:slug/publish", jwtCheck, patchPublishBlog);
+app.put("/blogs/:slug", jwtCheck, putBlogs);
 
 const PORT = process.env.PORT || 8080;
 

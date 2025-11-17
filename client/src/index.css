@@ -1,24 +1,25 @@
 @import "tailwindcss";
 
-@layer base {
-  body {
-    @apply bg-sky-50 text-gray-800 font-sans;
-  }
+h1 {
+  @apply text-3xl font-bold;
 }
 
-@layer utilities {
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+h2 {
+  @apply text-2xl font-semibold;
+}
 
-  .animate-slideDown {
-    animation: slideDown 0.3s ease-out;
-  }
+h3 {
+  @apply text-xl font-medium;
+}
+
+h4 {
+  @apply text-lg font-normal;
+}
+
+h5 {
+  @apply text-base font-light;
+}
+
+h6 {
+  @apply text-sm font-thin;
 }

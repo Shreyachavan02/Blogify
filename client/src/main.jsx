@@ -1,28 +1,26 @@
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-import './index.css';
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router";
+import "./index.css";
 import AllBlogs from "./views/AllBlogs";
-import NewBlog from "./views/NewBlog";
 import EditBlog from "./views/EditBlog";
-import Signup from './views/Signup';
 import Login from "./views/Login";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer"; 
+import NewBlog from "./views/NewBlog";
+import ReadBlog from "./views/ReadBlog";
+import Signup from "./views/Signup";
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <Navbar />
-
     <Routes>
       <Route path="/" element={<AllBlogs />} />
-      <Route path="/newblog" element={<NewBlog />} />
-      <Route path="/edit/:id" element={<EditBlog />} />
+      <Route path="/new" element={<NewBlog />} />
+      <Route path="/edit/:slug" element={<EditBlog />} />
+      <Route path="/blog/:slug" element={<ReadBlog />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="*" element={<h1 className="text-center mt-5">404 Not Found</h1>} />
+      <Route
+        path="*"
+        element={<h1 className="text-center mt-5">404 Not Found</h1>}
+      />
     </Routes>
-
-    <Footer />
   </BrowserRouter>
 );
