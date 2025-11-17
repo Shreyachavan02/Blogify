@@ -7,6 +7,7 @@ import Login from "./views/Login";
 import NewBlog from "./views/NewBlog";
 import ReadBlog from "./views/ReadBlog";
 import Signup from "./views/Signup";
+import About from "./views/About"; // ← ADD THIS
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -17,6 +18,10 @@ createRoot(document.getElementById("root")).render(
       <Route path="/blog/:slug" element={<ReadBlog />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+
+      {/* ADD ABOUT PAGE ROUTE */}
+      <Route path="/about" element={<About />} />
+
       <Route
         path="*"
         element={<h1 className="text-center mt-5">404 Not Found</h1>}
